@@ -24,7 +24,7 @@ public struct RouterView<Content: View>: View, Router {
     
     @ViewBuilder var content: (Router) -> Content
     
-    init(
+    public init(
         screenStack: (Binding<[AnyDestination]>)? = nil,
         addNavigationView: Bool = true,
         content: @escaping (Router) -> Content

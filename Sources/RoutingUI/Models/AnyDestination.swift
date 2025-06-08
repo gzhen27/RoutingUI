@@ -6,7 +6,7 @@
 //
 import SwiftUI
 
-struct AnyDestination: Hashable {
+public struct AnyDestination: Hashable {
     let id = UUID().uuidString
     var destination: AnyView
     
@@ -14,11 +14,11 @@ struct AnyDestination: Hashable {
         self.destination = destination.any()
     }
     
-    func hash(into hasher: inout Hasher) {
+    public func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
     
-    static func == (lhs: AnyDestination, rhs: AnyDestination) -> Bool {
+    public static func == (lhs: AnyDestination, rhs: AnyDestination) -> Bool {
         lhs.hashValue == rhs.hashValue
     }
 }
