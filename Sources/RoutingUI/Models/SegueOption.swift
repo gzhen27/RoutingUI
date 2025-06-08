@@ -6,7 +6,7 @@
 //
 import SwiftUI
 
-enum SegueOption: String {
+public enum SegueOption: String {
     case push = "Push"
     case sheet = "Sheet"
     case fullScreenCover = "Full Screen Cover"

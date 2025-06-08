@@ -6,7 +6,7 @@
 //
 import SwiftUI
 
-struct RouterView<Content: View>: View, Router {
+public struct RouterView<Content: View>: View, Router {
     @Environment(\.dismiss) private var dismiss
     
     @State private var path: [AnyDestination] = []
@@ -34,7 +34,7 @@ struct RouterView<Content: View>: View, Router {
         self.content = content
     }
     
-    var body: some View {
+    public var body: some View {
         NavigationStackIfNeeded(path: $path, addNavigationView: addNavigationView) {
             content(self)
                 .sheetViewModifier(screen: $showSheet)
@@ -45,7 +45,7 @@ struct RouterView<Content: View>: View, Router {
         .environment(\.router, self)
     }
     
-    func showScreen<T: View>(_ option: SegueOption, @ViewBuilder destination: @escaping (Router) -> T) {
+    public func showScreen<T: View>(_ option: SegueOption, @ViewBuilder destination: @escaping (Router) -> T) {
         let screen = RouterView<T>(
             screenStack: option.shouldAddNewNavigationView ? nil : (screenStack.isEmpty ? $path : $screenStack),
             addNavigationView: option.shouldAddNewNavigationView
@@ -71,27 +71,27 @@ struct RouterView<Content: View>: View, Router {
         }
     }
     
-    func dismissScreen() {
+    public func dismissScreen() {
         dismiss()
     }
     
-    func showAlert(_ option: AlertType, title: String, subtitle: String? = nil, buttons: (@Sendable () -> AnyView)? = nil) {
+    public func showAlert(_ option: AlertType, title: String, subtitle: String? = nil, buttons: (@Sendable () -> AnyView)? = nil) {
         self.alertOption = option
         self.alert = AnyAppAlert(title: title, subtitle: subtitle, buttons: buttons)
     }
     
-    func dismissAlert() {
+    public func dismissAlert() {
         alert = nil
     }
     
-    func showModal<T: View>( backgroundColor: Color, transition: AnyTransition, @ViewBuilder destination: @escaping () -> T) {
+    public func showModal<T: View>( backgroundColor: Color, transition: AnyTransition, @ViewBuilder destination: @escaping () -> T) {
         self.modalBackgroundColor = backgroundColor
         self.modalTransition = transition
         let destination = AnyDestination(destination: destination())
         self.modal = destination
     }
     
-    func dismissModal() {
+    public func dismissModal() {
         modal = nil
     }
 }
